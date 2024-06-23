@@ -65,32 +65,41 @@ def download(url, cookies):
 
 		elif product_type == "carousel_container":
 			carousel_media = data["items"][0]["carousel_media"]
-			list_url_path = []
+			list_url_image = []
+			list_url_video = []
 			count=0
 			for x in carousel_media:
 				image_url = x["image_versions2"]["candidates"][0]["url"]
-				if ".jpg" in image_url:
-					filename = filename+str(count)+".jpg"
-					fs = GridFS(mongo.db, collection="image")
-					url_path = url_host+"image/"+str(file_id)
+				try:
+					video_url = x["video_versions"][0]["url"]
+				except:
+					video_url = None
 
-				elif ".mp4" in image_url:
+				if video_url:
 					filename = filename+str(count)+".mp4"
+
 					fs = GridFS(mongo.db, collection="video")
+					file_download = requests.get(video_url).content
+
+					file_id = fs.put(file_download, filename=filename)
 					url_path = url_host+"video/"+str(file_id)
+
+					list_url_video.append(url_path)
 
 				else:
 					filename = filename+str(count)+".jpg"
 					fs = GridFS(mongo.db, collection="image")
+					file_download = requests.get(image_url).content
+
+					file_id = fs.put(file_download, filename=filename)
 					url_path = url_host+"image/"+str(file_id)
 
-				file_download = requests.get(image_url).content
-				file_id = fs.put(file_download, filename=filename)
+					list_url_image.append(url_path)
 
-				list_url_path.append(url_path)
 				count+=1
 
-			response_json["media"]["image"] = { "url": list_url_path }
+			response_json["media"]["image"] = { "url": list_url_image }
+			response_json["media"]["video"] = { "url": list_url_video }
 
 
 		elif product_type == "clips":
