@@ -47,7 +47,7 @@ cd apiFlask
 Create & activate python virtual enviroment
 ```bash
 python3 -m venv venv
-source /venv/bin/activate
+source venv/bin/activate
 ```
 Install requirements
 ```bash
@@ -98,7 +98,7 @@ Finally, we set up Nginx as a reverse-proxy to accept the requests from the user
 
 Install Nginx 
 ```bash
-sudo apt-get nginx
+sudo apt install nginx
 ```
 Start the Nginx service and go to the Public IP address on the browser to see the default nginx landing page
 ```bash
