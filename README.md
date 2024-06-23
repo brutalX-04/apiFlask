@@ -1,8 +1,8 @@
 # Installation and running in ubuntu server
-Install MongoDB Community Edition
+Install MongoDB Community Edition,
 <a href="https://www.mongodb.com/docs/v4.4/tutorial/install-mongodb-on-ubuntu/">Read documentations</a>
-If installation succes
-Create service for auto run app on after vps rebooted
+
+If installation succes, Create service for auto run app after vps rebooted
 ```bash
 sudo nano /etc/systemd/system/mongodb.service
 ```
@@ -63,7 +63,7 @@ gunicorn -b 0.0.0.0:8000 app:app
 ```
 if no errors ( ctrl + c ) to stop gunicorn
 
-Create service for auto run app on after vps rebooted
+Create service for auto run app after vps rebooted
 ```bash
 sudo nano /etc/systemd/system/apiFlask.service
 ```
