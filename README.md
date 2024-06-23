@@ -1,6 +1,6 @@
 # Installation and running in ubuntu server
 Install MongoDB Community Edition,
-<a href="https://www.mongodb.com/docs/v4.4/tutorial/install-mongodb-on-ubuntu/">Read documentations</a>
+<a href="https://www.mongodb.com/docs/v7.0/tutorial/install-mongodb-on-ubuntu/">Read documentations</a>
 
 If installation succes, Create service for auto run app after vps rebooted
 ```bash
@@ -76,7 +76,7 @@ After=network.target
 User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/apiFlask
-ExecStart=/home/ubuntu/venv/bin/gunicorn -b localhost:8000 app:app
+ExecStart=/home/ubuntu/apiFlask/venv/bin/gunicorn -b localhost:8000 app:app
 Restart=always
 [Install]
 WantedBy=multi-user.target
